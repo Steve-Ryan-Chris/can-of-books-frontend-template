@@ -11,7 +11,7 @@ export default class Header extends React.Component {
 
   render() {
     return (
-      <>
+      
         <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
           <Navbar.Brand>My Favorite Books</Navbar.Brand>
           <NavItem><Link to="/" className="nav-link">Home</Link></NavItem>
@@ -22,7 +22,7 @@ export default class Header extends React.Component {
           {/* if the user is logged in, render the `LogoutButton` */}
           {this.props.active_user && <NavItem><Link onClick={this.handleClick} to="/" className="nav-link">Logout</Link></NavItem>}
         </Navbar>
-      </>
+      
     )
   }
 }
