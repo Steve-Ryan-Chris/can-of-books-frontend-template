@@ -1,31 +1,47 @@
 import React from 'react';
 import Header from './Header';
 import Footer from './Footer';
+import Home from './Home';
+import BestBooks from './BestBooks';
+import Profile from './Profile';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {
   BrowserRouter as Router,
   Switch,
   Route
 } from "react-router-dom";
+import BestBooks from './BestBooks';
 
-class App extends React.Component {
+export default class App extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      user: null,
+      loginAttempt: false,
+      active_user: false,
+      user_name: null,
+      user_email: null
     }
   }
 
-  loginHandler = (user) => {
+  handle_login_attempt = () => {
     this.setState({
-      user,
+      loginAttempt: true
+    });
+  }
+
+  loginHandler = (username, email) => {
+    this.setState({
+      loginAttempt: false,
+      active_user: true,
+      user_name: username,
+      user_email: email
     })
   }
 
-  logoutHandler = () => {
+  handleLogout = () => {
     this.setState({
-      user: null,
+      active_user: false
     })
   }
 
@@ -33,12 +49,25 @@ class App extends React.Component {
     return (
       <>
         <Router>
-          <Header user={this.state.user} onLogout={this.logoutHandler} />
+          <Header active_user={this.state.active_user} handleLogout={this.handleLogout} />
           <Switch>
+
+            {/* home screen route*/}
             <Route exact path="/">
-              {/* TODO: if the user is logged in, render the `BestBooks` component, if they are not, render the `Login` component */}
-            </Route>
-            {/* TODO: add a route with a path of '/profile' that renders a `Profile` component */}
+              <Home active_user={this.state.active_user} handle_login_attempt={this.handle_login_attempt} 
+              loginAttempt={this.state.loginAttempt} loginHandler={this.loginHandler}/>
+            </Route >
+
+            {/* books route*/}
+            <Route path="/books">
+              <BestBooks />
+            </Route >
+
+            {/* profile route*/}
+            <Route path="/profile">
+              <Profile username={this.state.user_name} email={this.state.user_email}/>
+            </Route >
+
           </Switch>
           <Footer />
         </Router>
@@ -46,5 +75,4 @@ class App extends React.Component {
     )
   }
 }
-
-export default App;
+{/* TODO: if the user is logged in, render the `BestBooks` component, if they are not, render the `Home` component */}
