@@ -5,7 +5,7 @@ export default class Profile extends React.Component {
 
   render() {
     return(
-      <>
+      
         <Card style={{ width: '18rem' }}>
           <Card.Body>
             <Card.Title>User Info</Card.Title>
@@ -19,7 +19,7 @@ export default class Profile extends React.Component {
             </Card.Text>
           </Card.Body>
         </Card>
-      </>
+      
     )
   }
 };

@@ -1,5 +1,8 @@
 import React from 'react';
+import axios from 'axios';
 import Carousel from 'react-bootstrap/Carousel';
+
+var server = process.env.REACT_APP_SERVER;
 
 export default class BestBooks extends React.Component {
   
@@ -10,24 +13,42 @@ export default class BestBooks extends React.Component {
     }
   }
 
-  /* TODO: Make a GET request to your API to fetch books for the logged in user  */
-  
-  /* TODO: render user's books in a Carousel */
+  componentDidMount() {
+    this.getBooks();
+  }
+
+  getBooks = async () => {
+    let apiURL = `${server}/books/`;
+
+    try {
+      const bookResponse = await axios.get(apiURL);
+      const books = bookResponse.data;
+      this.setState({
+        books,
+      });
+      console.log(books);
+    } catch (error) {
+      console.log("Error 404");
+    }
+  }
+
   render() {
     return (
       <>
-        <Carousel variant="dark">
-          <Carousel.Item>
-            <img
-              className="d-block w-100"
-              src="holder.js/800x400?text=First slide&bg=f5f5f5"
-              alt="First slide"
-            />
-            <Carousel.Caption>
-              <h5>First slide label</h5>
-              <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-            </Carousel.Caption>
-          </Carousel.Item>
+        <h2>My Essential Lifelong Learning &amp; Formation Shelf</h2>
+
+        <Carousel>
+          {this.state.books ? (
+            this.state.books.map((data, index) => (
+              <Carousel.Item key={index}>
+                {/* <Book info={data}/> */}
+              </Carousel.Item>
+            ))
+          ) : (
+          <h1>Sorry this book is unavailable! Please search for another.</h1>
+          ) 
+          }
+            
         </Carousel>
       </>
     )
