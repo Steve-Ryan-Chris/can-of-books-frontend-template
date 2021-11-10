@@ -40,5 +40,17 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "description": "**Author**: Steve Ngo - Ryan Harden - Chris Harden **Version**: 1.0.0 (increment the patch/fix version number if you make more commits past your first submission)",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Steve-Ryan-Chris/can-of-books-frontend-template.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Steve-Ryan-Chris/can-of-books-frontend-template/issues"
+  },
+  "devDependencies": {}
 }

@@ -10,7 +10,6 @@ import {
   Switch,
   Route
 } from "react-router-dom";
-import BestBooks from './BestBooks';
 
 export default class App extends React.Component {
 
@@ -75,4 +74,3 @@ export default class App extends React.Component {
     )
   }
 }
-{/* TODO: if the user is logged in, render the `BestBooks` component, if they are not, render the `Home` component */}
