@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import BookForm from './BookForm';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 
@@ -18,7 +19,7 @@ export default class BookModal extends Component {
           </Modal.Header>
 
           <Modal.Body>
-            
+            <BookForm email={this.props.email} handlePostBook={this.props.handlePostBook}/>
           </Modal.Body>
 
           <Modal.Footer>

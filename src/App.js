@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import Header from './Header';
 import Footer from './Footer';
 import Home from './Home';
@@ -54,6 +55,12 @@ export default class App extends React.Component {
     this.setState({ modal: false })
   }
 
+  handlePostBook = async (bookInfo) => {
+    var newBookInfo = await axios.post(`${process.env.REACT_APP_SERVER}/books/?email=${this.state.user_email}`, bookInfo)
+    var bookData = newBookInfo.data
+    console.log(bookData);
+  }
+
   render() {
     return (
       <>
@@ -79,7 +86,7 @@ export default class App extends React.Component {
 
           </Switch>
           <Footer />
-          <Modal hideModal={this.hideModal} showModal={this.state.modal}/>
+          <Modal hideModal={this.hideModal} showModal={this.state.modal} email={this.state.user_email} handlePostBook={this.handlePostBook}/>
         </Router>
       </>
     )
