@@ -4,6 +4,7 @@ import Footer from './Footer';
 import Home from './Home';
 import BestBooks from './BestBooks';
 import Profile from './Profile';
+import Modal from './BookModal';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {
   BrowserRouter as Router,
@@ -19,7 +20,8 @@ export default class App extends React.Component {
       loginAttempt: false,
       active_user: false,
       user_name: null,
-      user_email: null
+      user_email: null,
+      modal: false,
     }
   }
 
@@ -44,11 +46,19 @@ export default class App extends React.Component {
     })
   }
 
+  showModal = () => {
+    this.setState({ modal: true })
+  }
+
+  hideModal = () => {
+    this.setState({ modal: false })
+  }
+
   render() {
     return (
       <>
         <Router>
-          <Header active_user={this.state.active_user} handleLogout={this.handleLogout} />
+          <Header active_user={this.state.active_user} handleLogout={this.handleLogout} showModal={this.showModal}/>
           <Switch>
 
             {/* home screen route*/}
@@ -69,6 +79,7 @@ export default class App extends React.Component {
 
           </Switch>
           <Footer />
+          <Modal hideModal={this.hideModal} showModal={this.state.modal}/>
         </Router>
       </>
     )
