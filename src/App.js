@@ -59,7 +59,7 @@ export default class App extends React.Component {
 
             {/* books route*/}
             <Route path="/books">
-              <BestBooks />
+              <BestBooks email={this.state.user_email}/>
             </Route >
 
             {/* profile route*/}
