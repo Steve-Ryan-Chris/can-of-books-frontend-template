@@ -10,7 +10,7 @@ export default class BestBooks extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      books: []
+      books: NaN
     }
   }
 
@@ -34,6 +34,7 @@ export default class BestBooks extends React.Component {
   }
 
   render() {
+    console.log(this.state.books);
     return (
       <>
         <h2>My Essential Lifelong Learning &amp; Formation Shelf</h2>
@@ -46,7 +47,9 @@ export default class BestBooks extends React.Component {
               </Carousel.Item>
             ))
           ) : (
-          <h1>Sorry this book is unavailable! Please search for another.</h1>
+            <Carousel.Item>
+            <NoBooks/>
+          </Carousel.Item>
           ) 
           }
             
@@ -81,12 +84,26 @@ class Book extends React.Component {
           >
             Delete
           </Button>
-          {/* <Button
-            variant="warning"
-            onClick={() => this.props.handleUpdateBook(this.props.info._id)}
-          >
-            Update
-          </Button> */}
+        </Carousel.Caption>
+      </>
+    );
+  }
+}
+
+class NoBooks extends React.Component {
+  
+
+  render() {
+    return (
+      <>
+        <img
+          className="d-block w-100"
+          src="https://trumpwallpapers.com/wp-content/uploads/Book-Wallpaper-03-3840-x-2400.jpg"
+          alt="library"
+        />
+        <Carousel.Caption>
+          <h1>No Books</h1>
+          <h4>Add a book?</h4>
         </Carousel.Caption>
       </>
     );
