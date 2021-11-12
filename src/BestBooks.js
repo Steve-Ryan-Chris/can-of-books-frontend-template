@@ -1,15 +1,14 @@
 import React from 'react';
 import axios from 'axios';
-import Carousel from 'react-bootstrap/Carousel';
+import BookCarousel from './BookCarousel';
 
-var server = process.env.REACT_APP_SERVER;
 
 export default class BestBooks extends React.Component {
   
   constructor(props) {
     super(props);
     this.state = {
-      books: []
+      books: NaN
     }
   }
 
@@ -18,8 +17,8 @@ export default class BestBooks extends React.Component {
   }
 
   getBooks = async () => {
-    let apiURL = `${server}/books/`;
-
+    let apiURL = `${process.env.REACT_APP_SERVER}/books/?email=${this.props.email}`;
+    console.log(apiURL);
     try {
       const bookResponse = await axios.get(apiURL);
       const books = bookResponse.data;
@@ -33,23 +32,12 @@ export default class BestBooks extends React.Component {
   }
 
   render() {
+    console.log(this.state.books);
     return (
       <>
         <h2>My Essential Lifelong Learning &amp; Formation Shelf</h2>
 
-        <Carousel>
-          {this.state.books ? (
-            this.state.books.map((data, index) => (
-              <Carousel.Item key={index}>
-                {/* <Book info={data}/> */}
-              </Carousel.Item>
-            ))
-          ) : (
-          <h1>Sorry this book is unavailable! Please search for another.</h1>
-          ) 
-          }
-            
-        </Carousel>
+        <BookCarousel books={this.state.books} email={this.props.email}/>
       </>
     )
   }

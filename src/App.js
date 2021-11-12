@@ -1,9 +1,11 @@
 import React from 'react';
+import axios from 'axios';
 import Header from './Header';
 import Footer from './Footer';
 import Home from './Home';
 import BestBooks from './BestBooks';
 import Profile from './Profile';
+import Modal from './BookModal';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {
   BrowserRouter as Router,
@@ -19,7 +21,8 @@ export default class App extends React.Component {
       loginAttempt: false,
       active_user: false,
       user_name: null,
-      user_email: null
+      user_email: null,
+      modal: false,
     }
   }
 
@@ -44,11 +47,26 @@ export default class App extends React.Component {
     })
   }
 
+  showModal = () => {
+    this.setState({ modal: true })
+  }
+
+  hideModal = () => {
+    this.setState({ modal: false })
+  }
+
+  handlePostBook = async (bookInfo) => {
+    var newBookInfo = await axios.post(`${process.env.REACT_APP_SERVER}/books/?email=${this.state.user_email}`, bookInfo)
+    var bookData = newBookInfo.data
+    console.log(bookData);
+    console.log(newBookInfo);
+  }
+
   render() {
     return (
       <>
         <Router>
-          <Header active_user={this.state.active_user} handleLogout={this.handleLogout} />
+          <Header active_user={this.state.active_user} handleLogout={this.handleLogout} showModal={this.showModal}/>
           <Switch>
 
             {/* home screen route*/}
@@ -59,7 +77,7 @@ export default class App extends React.Component {
 
             {/* books route*/}
             <Route path="/books">
-              <BestBooks />
+              <BestBooks email={this.state.user_email}/>
             </Route >
 
             {/* profile route*/}
@@ -69,6 +87,7 @@ export default class App extends React.Component {
 
           </Switch>
           <Footer />
+          <Modal hideModal={this.hideModal} showModal={this.state.modal} email={this.state.user_email} handlePostBook={this.handlePostBook}/>
         </Router>
       </>
     )
