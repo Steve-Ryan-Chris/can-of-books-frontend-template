@@ -59,6 +59,7 @@ export default class App extends React.Component {
     var newBookInfo = await axios.post(`${process.env.REACT_APP_SERVER}/books/?email=${this.state.user_email}`, bookInfo)
     var bookData = newBookInfo.data
     console.log(bookData);
+    console.log(newBookInfo);
   }
 
   render() {

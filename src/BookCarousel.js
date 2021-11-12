@@ -9,7 +9,7 @@ export default class BookCarousel extends React.Component {
           {this.props.books.length ? (
             this.props.books.map((data, index) => (
               <Carousel.Item key={index}>
-                <Book info={data}/>
+                <Book info={data} email={this.props.email}/>
               </Carousel.Item>
             ))
           ) : (

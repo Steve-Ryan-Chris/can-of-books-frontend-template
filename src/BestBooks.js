@@ -37,7 +37,7 @@ export default class BestBooks extends React.Component {
       <>
         <h2>My Essential Lifelong Learning &amp; Formation Shelf</h2>
 
-        <BookCarousel books={this.state.books}/>
+        <BookCarousel books={this.state.books} email={this.props.email}/>
       </>
     )
   }

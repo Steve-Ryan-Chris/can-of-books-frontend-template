@@ -19,7 +19,7 @@ export default class BookModal extends Component {
           </Modal.Header>
 
           <Modal.Body>
-            <BookForm email={this.props.email} handlePostBook={this.props.handlePostBook}/>
+            <BookForm email={this.props.email} handlePostBook={this.props.handlePostBook} hideModal={this.props.hideModal}/>
           </Modal.Body>
 
           <Modal.Footer>

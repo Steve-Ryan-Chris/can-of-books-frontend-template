@@ -7,8 +7,8 @@ import Button from "react-bootstrap/Button";
 export default class Book extends React.Component {
   handleDelete = async (id) => {
     console.log(id);
-    await axios.delete(`${process.env.REACT_APP_SERVER}/books/${id}`);
-    this.props.getBooks();
+    await axios.delete(`${process.env.REACT_APP_SERVER}/books/${id}?email=${this.props.email}`);
+    // this.props.reload();
   };
 
   render() {

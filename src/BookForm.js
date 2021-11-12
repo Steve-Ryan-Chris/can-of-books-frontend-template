@@ -6,17 +6,20 @@ export default class BookCarousel extends React.Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    this.props.handlePostBook({
-        title: event.target.title.value,
-        description: event.target.description.value,
-        status: event.target.status.value,
-        email: this.props.email,
-    })
+    const title= event.target.title.value;
+    const description= event.target.description.value;
+    let status= 'read'
+    if (!event.target.read.checked) {
+      status= 'unread'
+    };
+    const email= this.props.email;
+
+    this.props.handlePostBook({title, description, status, email,});
 }
 
   render() {
     return (
-      <Form>
+      <Form onSubmit={this.handleSubmit}>
         <Form.Group className="mb-3" controlId="title">
           <Form.Label>Title</Form.Label>
             <Form.Control type="name" placeholder="Enter book title" />
@@ -29,8 +32,18 @@ export default class BookCarousel extends React.Component {
                 
 
         <Form.Group className="mb-3" controlId="status">
-          <Form.Label>Status</Form.Label>
-          <Form.Control type="name" placeholder="Read or unread?" />
+          <Form.Check
+            type="radio"
+            label="read"
+            name="radio"
+            id="read"
+          />
+          <Form.Check
+          type="radio"
+          label="unread"
+          name="radio"
+          id="unread"
+          />
         </Form.Group>
         
         <Button variant="primary" type="submit">submit</Button>
