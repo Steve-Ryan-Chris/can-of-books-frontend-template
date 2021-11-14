@@ -6,6 +6,7 @@ import Home from './Home';
 import BestBooks from './BestBooks';
 import Profile from './Profile';
 import Modal from './BookModal';
+import UpdateModal from './UpdateModal';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {
   BrowserRouter as Router,
@@ -23,6 +24,7 @@ export default class App extends React.Component {
       user_name: null,
       user_email: null,
       modal: false,
+      updateModal: false,
     }
   }
 
@@ -54,6 +56,15 @@ export default class App extends React.Component {
   hideModal = () => {
     this.setState({ modal: false })
   }
+
+  showUpdateModal = () => {
+    this.setState({ updateModal: true })
+  }
+
+  hideUpdateModal = () => {
+    this.setState({ updateModal: false })
+  }
+
 
   handlePostBook = async (bookInfo) => {
     var newBookInfo = await axios.post(`${process.env.REACT_APP_SERVER}/books/?email=${this.state.user_email}`, bookInfo)
@@ -88,6 +99,8 @@ export default class App extends React.Component {
           </Switch>
           <Footer />
           <Modal hideModal={this.hideModal} showModal={this.state.modal} email={this.state.user_email} handlePostBook={this.handlePostBook}/>
+
+          <UpdateModal hideModal={this.hideUpdateModal} showModal={this.state.updateModal} email={this.state.user_email} />
         </Router>
       </>
     )

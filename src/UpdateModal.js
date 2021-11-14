@@ -3,14 +3,14 @@ import BookForm from './BookForm';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 
-export default class BookModal extends Component {
+export default class UpdateModal extends Component {
 
   render() {
     return (
-      <>
+      
         <Modal
           show={this.props.showModal}
-          onHide={this.props.hideModal}ds
+          onHide={this.props.hideModal}
           backdrop="static"
           keyboard={false}
         >
@@ -28,7 +28,7 @@ export default class BookModal extends Component {
             </Button>
           </Modal.Footer>
         </Modal>
-      </>
+      
     )
   }
 }
